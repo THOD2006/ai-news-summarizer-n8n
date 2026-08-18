@@ -1,199 +1,89 @@
-# 🤖 AI News Summarizer & Daily Tech Briefing
+# 🤖 AI News Summarizer
 
-> An AI-powered news automation system built with **n8n** and **Google Gemini** that collects AI and technology news, generates concise summaries, and delivers a daily technology briefing by email.
+An automated AI-powered news intelligence workflow built with **n8n** and **Google Gemini**.
 
-## 🚀 Overview
+The workflow collects AI news, technology updates, and upcoming AI events from multiple sources, processes the information using an LLM, and automatically delivers a concise daily technology briefing through Gmail.
 
-Keeping up with the rapidly changing AI and technology landscape can be time-consuming.
+## 🚀 Features
 
-This project automates the process of collecting and summarizing relevant news. It uses scheduled workflow automation to fetch news from RSS feeds, combine the collected articles, process them with Google Gemini, and deliver a concise daily briefing through email.
+- 📰 Collects AI news through RSS feeds
+- 💻 Collects technology news from TechCrunch
+- 📅 Fetches upcoming AI and technology events
+- 🔀 Combines news from multiple sources using n8n Merge
+- 🤖 Uses Google Gemini to generate concise summaries
+- 📧 Automatically sends the final daily briefing through Gmail
+- ⏰ Runs automatically using an n8n Schedule Trigger
 
-## ✨ Features
+## 🔄 Workflow
 
-* 📰 Collects AI news from an RSS feed
-* 💻 Collects broader technology news from an RSS feed
-* 🔄 Combines news from multiple sources
-* 🧠 Uses Google Gemini for AI-powered summarization
-* 📑 Organizes news into AI and Technology sections
-* ✂️ Produces concise 1–2 sentence summaries
-* 🔗 Preserves article links
-* ⏰ Runs automatically on a scheduled trigger
-* 📧 Delivers the final briefing through email
-
-## 🏗️ Workflow Architecture
-
-```text
-                    ┌──────────────────┐
-                    │  Schedule Trigger │
-                    └────────┬─────────┘
-                             │
-                  ┌──────────┴──────────┐
-                  │                     │
-                  ▼                     ▼
-          ┌──────────────┐      ┌──────────────┐
-          │   AI News    │      │  Tech News   │
-          │   RSS Feed   │      │   RSS Feed   │
-          └──────┬───────┘      └──────┬───────┘
-                 │                     │
-                 └──────────┬──────────┘
-                            ▼
-                     ┌────────────┐
-                     │    Merge   │
-                     └─────┬──────┘
-                           ▼
-                    ┌─────────────┐
-                    │  Aggregate  │
-                    └──────┬──────┘
-                           ▼
-                  ┌──────────────────┐
-                  │  Google Gemini   │
-                  │  AI Summarizer   │
-                  └────────┬─────────┘
-                           ▼
-                    ┌─────────────┐
-                    │ Email Brief │
-                    └─────────────┘
-```
-
-## 🔄 How It Works
-
-### 1. Scheduled Trigger
-
-The workflow starts automatically using a scheduled trigger.
-
-### 2. Collect AI News
-
-The workflow reads AI-related articles from an RSS feed.
-
-### 3. Collect Technology News
-
-A second RSS feed provides broader technology news.
-
-### 4. Merge & Aggregate
-
-The two streams are merged and aggregated into a combined collection of news items.
-
-### 5. AI Summarization
-
-The collected articles are passed to a Google Gemini-powered LLM chain.
-
-The prompt instructs the model to:
-
-* Use only the provided news items
-* Avoid inventing information
-* Separate AI news from broader technology news
-* Select relevant stories
-* Generate concise summaries
-* Preserve article links
-
-### 6. Email Delivery
-
-The generated technology briefing is sent as an email containing the summarized news.
-
-## 📰 News Sources
-
-The current workflow uses RSS feeds from:
-
-* **AI Business** — AI-focused news
-* **TechCrunch** — broader technology news
+Schedule Trigger
+        ↓
+ ┌──────┼──────────┐
+ ↓      ↓          ↓
+AI News Tech News  AI Events
+ ↓      ↓          ↓
+ └──────┼──────────┘
+        ↓
+      Merge
+        ↓
+    Aggregate
+        ↓
+ Google Gemini
+        ↓
+   Gmail Delivery
 
 ## 🛠️ Technologies Used
 
-| Technology        | Purpose                                     |
-| ----------------- | ------------------------------------------- |
-| **n8n**           | Workflow automation                         |
-| **Google Gemini** | AI-powered news summarization               |
-| **RSS Feeds**     | News ingestion                              |
-| **Gmail**         | Automated email delivery                    |
-| **LLM Prompting** | Structured summarization and categorization |
+- n8n
+- Google Gemini
+- RSS Feeds
+- TechCrunch
+- SerpAPI
+- Gmail
+- AI / LLM workflow automation
 
-## ⚙️ Setup
+## 📌 Data Sources
 
-### Prerequisites
+- AI Business RSS Feed
+- TechCrunch RSS Feed
+- Google Events through SerpAPI
 
-Before running this workflow, you need:
+## 🧠 AI Processing
 
-* An **n8n** instance
-* A **Google Gemini API credential**
-* A **Gmail account/credential**
-* Internet access for RSS feeds
+Google Gemini processes the collected information and generates a structured technology briefing containing:
 
-### Import the Workflow
+- AI News Highlights
+- Technology Updates
+- Upcoming AI Events
 
-1. Open your n8n instance.
-2. Create or open a workflow.
-3. Use **Import from File**.
-4. Select the workflow JSON from this repository.
-5. Configure your own credentials.
-6. Review the RSS feed configuration.
-7. Configure the destination email.
-8. Test the workflow.
-9. Activate the workflow when everything works correctly.
+The workflow instructs the model to use only the provided items and generate concise, professional summaries.
 
-> ⚠️ **Security:** Never commit API keys, OAuth tokens, passwords, private credentials, or personal configuration values to GitHub. Configure your own credentials inside n8n.
+## ⚙️ How It Works
 
-## 📧 Example Output
+1. The workflow starts automatically using a scheduled trigger.
+2. AI-related news is collected from an RSS feed.
+3. Technology news is collected from TechCrunch.
+4. Upcoming AI events are retrieved through SerpAPI.
+5. The collected data is merged and aggregated.
+6. Google Gemini analyzes and summarizes the information.
+7. The generated briefing is automatically sent through Gmail.
 
-The generated briefing is structured into:
+## 🔐 Security
+
+API keys and private credentials have been removed from the GitHub version of the workflow.
+
+Before running the workflow, configure your own:
+
+- Google Gemini credentials
+- SerpAPI credentials
+- Gmail credentials
+
+**Never commit API keys, passwords, tokens, or private credentials to GitHub.**
+
+## 📂 Project Structure
 
 ```text
-Hi there,
-Here's your Tech Brief:
-
-AI NEWS
-=======
-
-HEADLINE
-
-Summary...
-
-Link: <article link>
-
-TECHNOLOGY UPDATES
-==================
-
-HEADLINE
-
-Summary...
-
-Link: <article link>
-```
-
-## 🎯 Project Goals
-
-This project demonstrates how AI and workflow automation can be combined to transform raw information into a useful, automatically delivered daily briefing.
-
-It also provides practical experience with:
-
-* Workflow orchestration
-* RSS-based data ingestion
-* Data aggregation
-* LLM integration
-* Prompt engineering
-* Automated communication
-* AI-powered information processing
-
-## 🔮 Future Improvements
-
-Potential improvements include:
-
-* Add more news sources
-* Add configurable news categories
-* Add keyword-based filtering
-* Add duplicate-news detection
-* Add HTML email formatting
-* Add personalized topics
-* Add a web dashboard
-* Add database storage for historical news
-* Add article ranking based on relevance
-* Add error handling and monitoring
-
-## 👨‍💻 Author
-
-**THOD2006**
-
-Built as a practical AI automation project using **n8n** and **Google Gemini**.
-
----
-
-⭐ If you find this project useful, consider giving the repository a star!
+ai-news-summarizer/
+│
+├── ai-news-summarizer-github-safe.json
+└── README.md
