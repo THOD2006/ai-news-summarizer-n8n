@@ -16,6 +16,8 @@ The workflow collects AI news, technology updates, and upcoming AI events from m
 
 ## 🔄 Workflow
 
+![AI News Summarizer Workflow](workflow.png)
+
 Schedule Trigger
         ↓
  ┌──────┼──────────┐
